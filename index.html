@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f766e">
+<title>Petualangan Jejak Kebaikan — Game PAI SMP</title>
+<style>
+:root{--green:#0f766e;--deep:#134e4a;--mint:#d1fae5;--gold:#fbbf24;--cream:#fffdf5;--ink:#18312f;--muted:#607572;--red:#b91c1c}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(160deg,#e8fff5,#fff8df 65%,#e0f2fe);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);min-height:100vh}
+button,input,select{font:inherit} button{cursor:pointer;border:0;border-radius:14px;padding:12px 16px;font-weight:750;transition:transform .12s,filter .12s}button:hover{filter:brightness(1.04);transform:translateY(-1px)}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+.wrap{max-width:1000px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.logo{font-size:2.1rem;background:#fff;border-radius:18px;padding:8px 12px;box-shadow:0 5px 0 #b7e4d4}.brand h1{font-size:clamp(1.25rem,4vw,2rem);margin:0;color:var(--deep)}.brand p{margin:3px 0;color:var(--muted);font-size:.9rem}.pill{background:#fff;border:1px solid #c6e8dc;border-radius:99px;padding:9px 13px;font-weight:800;color:var(--deep)}
+.hero{margin:22px 0;background:linear-gradient(120deg,#115e59,#0f766e 55%,#14b8a6);color:white;border-radius:28px;padding:clamp(22px,5vw,42px);position:relative;overflow:hidden;box-shadow:0 12px 30px #0f766e25}.hero:after{content:"🌙";position:absolute;font-size:8rem;right:8%;top:0;opacity:.15}.hero h2{font-size:clamp(1.8rem,5vw,3rem);line-height:1.08;margin:0 0 12px;max-width:650px}.hero p{max-width:610px;line-height:1.65;color:#e0f2f1}.hero .cta{background:var(--gold);color:#553600;margin-top:8px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#ffffffdf;border:1px solid #d9eee5;border-radius:22px;padding:18px;box-shadow:0 7px 20px #164e3b0b}.card h3{margin:5px 0 8px}.card p{color:var(--muted);line-height:1.5;margin:6px 0}.emoji{font-size:2rem}.section-title{margin:26px 0 12px;color:var(--deep)}.level-list{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.level{background:white;border:2px solid #cde9de;border-radius:18px;padding:14px 8px;text-align:center;min-height:116px}.level.locked{opacity:.5;filter:grayscale(.6)}.level.current{border-color:#f59e0b;box-shadow:0 0 0 3px #fef3c7}.level strong{display:block;margin:6px 0 4px}.level small{color:var(--muted)}.primary{background:var(--green);color:white}.secondary{background:#e0f2fe;color:#075985}.ghost{background:#f1f5f9;color:#334155}.danger{background:#fee2e2;color:#991b1b}
+.panel{background:white;border:1px solid #d9eee5;border-radius:24px;padding:clamp(18px,4vw,30px);box-shadow:0 12px 30px #164e3b10;margin:20px 0}.hidden{display:none!important}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.row>*{flex:1}.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}.field label{font-weight:750}.field input,.field select{width:100%;border:1px solid #b7d9cd;border-radius:12px;padding:12px;background:#fff}.mode-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mode-choice{background:#f0fdfa;border:2px solid #cde9de;color:var(--deep);text-align:left;padding:16px}.mode-choice.selected{border-color:var(--green);background:#d1fae5}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.stat{background:#f0fdfa;border-radius:15px;padding:12px;text-align:center}.stat b{display:block;font-size:1.5rem;color:var(--deep)}.progress{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:10px 0 18px}.progress span{display:block;height:100%;background:linear-gradient(90deg,#10b981,#fbbf24);width:0%;transition:width .25s}.question-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-weight:700;font-size:.92rem}.question{font-size:clamp(1.2rem,3vw,1.7rem);line-height:1.4;margin:18px 0}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{background:#f8fafc;border:2px solid #dbe5e2;color:var(--ink);text-align:left;min-height:58px}.answer.correct{background:#dcfce7;border-color:#16a34a}.answer.wrong{background:#fee2e2;border-color:#dc2626}.answer:disabled{cursor:default}.feedback{padding:14px;border-radius:14px;margin:14px 0;line-height:1.5}.feedback.good{background:#dcfce7;color:#166534}.feedback.bad{background:#fff1f2;color:#9f1239}.footer{color:var(--muted);text-align:center;padding:20px;font-size:.9rem}.badge{display:inline-block;background:#fef3c7;color:#92400e;border-radius:99px;padding:5px 10px;font-size:.85rem;font-weight:800}.team-score{display:flex;gap:10px}.team{background:#f8fafc;border:2px solid #dbe5e2;border-radius:14px;padding:12px;flex:1}.team.active{border-color:#0f766e;background:#ccfbf1}.small{font-size:.88rem;color:var(--muted)}ul{padding-left:22px;line-height:1.8}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.level-list{grid-template-columns:repeat(2,1fr)}.answers{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}.wrap{padding:13px}.hero:after{right:-4%;font-size:6rem}.top{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">🧭</div><div><h1>Jejak Kebaikan</h1><p>Petualangan PAI untuk SMP</p></div></div>
+    <div class="pill">⭐ <span id="headerPoints">0</span> poin</div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <span class="badge">GAME EDUKASI • KELAS 7–9</span>
+      <h2>Jelajahi ilmu,<br>kumpulkan kebaikan!</h2>
+      <p>Masuki pulau-pulau ilmu, jawab tantangan PAI, kumpulkan bintang, dan buka petualangan berikutnya. Belajar bisa dilakukan sendiri atau bersama tim kelas.</p>
+      <button class="cta" id="startButton">🚀 Mulai Petualangan</button>
+    </section>
+    <h2 class="section-title">🗺️ Peta Petualangan</h2>
+    <div class="level-list" id="levelMap"></div>
+    <h2 class="section-title">✨ Cara bermain</h2>
+    <div class="grid">
+      <article class="card"><div class="emoji">📚</div><h3>Pelajari materi</h3><p>Jawab soal tentang akidah, ibadah, akhlak, Al-Qur’an dan hadis, serta sejarah Islam.</p></article>
+      <article class="card"><div class="emoji">⭐</div><h3>Kumpulkan poin</h3><p>Jawaban benar bernilai 100 poin. Jawaban tepat berturut-turut menambah bonus.</p></article>
+      <article class="card"><div class="emoji">🤝</div><h3>Main bersama</h3><p>Pilih mode kelompok untuk bergiliran menjawab dan melihat skor kedua tim.</p></article>
+    </div>
+    <p class="small">Catatan: progres pada versi awal ini disimpan di browser/perangkat yang digunakan. Belum tersinkron otomatis ke perangkat lain.</p>
+  </main>
+
+  <section id="setup" class="panel hidden">
+    <div class="row"><div><span class="badge">PERSIAPAN</span><h2>Siap berpetualang?</h2><p class="small">Pilih mode permainan sebelum mulai.</p></div><button class="ghost" id="backHome">← Kembali</button></div>
+    <div class="mode-buttons">
+      <button class="mode-choice selected" data-mode="solo"><div class="emoji">🧑‍🎓</div><b>Mode Individu</b><p class="small">Belajar mandiri dan simpan rekor pribadi.</p></button>
+      <button class="mode-choice" data-mode="team"><div class="emoji">👥</div><b>Mode Kelompok</b><p class="small">Dua tim bermain bergiliran.</p></button>
+    </div>
+    <div id="soloSetup"><div class="field"><label for="playerName">Nama pemain (opsional)</label><input id="playerName" maxlength="30" placeholder="Contoh: Aisyah"></div></div>
+    <div id="teamSetup" class="hidden">
+      <div class="row"><div class="field"><label for="teamA">Nama Tim A</label><input id="teamA" maxlength="24" value="Tim Cendekia"></div><div class="field"><label for="teamB">Nama Tim B</label><input id="teamB" maxlength="24" value="Tim Berkah"></div></div>
+      <p class="small">Siapkan satu perangkat di depan kelas. Tim bergiliran menjawab soal.</p>
+    </div>
+    <div class="field"><label for="levelSelect">Pilih level</label><select id="levelSelect"></select><small class="small">Level yang terkunci terbuka setelah level sebelumnya diselesaikan.</small></div>
+    <button class="primary" id="playButton">Mulai Level 🎯</button>
+  </section>
+
+  <section id="game" class="panel hidden">
+    <div class="row"><div><span class="badge" id="levelBadge">LEVEL 1</span><h2 id="levelTitle">Gerbang Iman</h2><p id="playerLabel" class="small"></p></div><button class="ghost" id="quitButton">Keluar</button></div>
+    <div class="stats"><div class="stat"><span class="small">Poin sesi</span><b id="sessionPoints">0</b></div><div class="stat"><span class="small">Soal</span><b id="questionCount">1/5</b></div><div class="stat"><span class="small">Streak 🔥</span><b id="streak">0</b></div></div>
+    <div class="progress"><span id="progressBar"></span></div>
+    <div id="teamScore" class="team-score hidden"><div class="team" id="teamCardA"><b id="teamNameA">Tim A</b><div><span id="teamPointsA">0</span> poin</div></div><div class="team" id="teamCardB"><b id="teamNameB">Tim B</b><div><span id="teamPointsB">0</span> poin</div></div></div>
+    <div class="question-meta"><span id="topicLabel">Materi: Akidah</span><span id="turnLabel"></span></div>
+    <div class="question" id="questionText">Pertanyaan akan muncul di sini.</div>
+    <div class="answers" id="answers"></div>
+    <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+    <div class="row" style="margin-top:16px"><div class="small" id="hint">Pilih satu jawaban terbaik.</div><button id="nextButton" class="primary hidden">Soal Berikutnya →</button></div>
+  </section>
+
+  <section id="result" class="panel hidden">
+    <div style="text-align:center"><div style="font-size:4rem" id="resultEmoji">🏆</div><span class="badge">MISI SELESAI</span><h2 id="resultTitle">Hebat!</h2><p id="resultMessage"></p></div>
+    <div class="stats"><div class="stat"><span class="small">Poin didapat</span><b id="resultPoints">0</b></div><div class="stat"><span class="small">Jawaban benar</span><b id="resultCorrect">0/5</b></div><div class="stat"><span class="small">Bintang</span><b id="resultStars">☆☆☆</b></div></div>
+    <div id="teamResult" class="hidden"></div>
+    <div class="row"><button class="primary" id="replayButton">Main Lagi ↻</button><button class="secondary" id="mapButton">Kembali ke Peta 🗺️</button></div>
+  </section>
+
+  <section class="panel" id="teacherNotes">
+    <h3>👩‍🏫 Catatan untuk guru</h3>
+    <ul><li>Soal pada prototipe ini adalah contoh latihan umum, bukan pengganti buku teks atau penilaian resmi.</li><li>Sesuaikan soal, istilah, dan rujukan dengan buku PAI dan Budi Pekerti yang digunakan sekolah.</li><li>Mode kelompok memakai satu perangkat dan dua tim. Mode daring banyak perangkat dengan papan peringkat bersama memerlukan backend/database.</li></ul>
+    <button class="ghost" id="resetButton">Hapus progres lokal</button>
+  </section>
+  <footer class="footer">🧭 Jejak Kebaikan • Prototipe pembelajaran PAI • Belajar dengan ilmu dan akhlak</footer>
+</div>
+<script>
+const levels = [
+ {name:"Gerbang Iman",icon:"🌟",topic:"Akidah",questions:[
+  ["Rukun iman berjumlah ...","Lima","Enam","Tujuh","Delapan",1,"Rukun iman ada enam, mulai dari iman kepada Allah hingga iman kepada qada dan qadar."],
+  ["Kitab yang diturunkan kepada Nabi Musa a.s. adalah ...","Zabur","Injil","Taurat","Al-Qur’an",2,"Kitab Taurat diturunkan kepada Nabi Musa a.s."],
+  ["Malaikat yang bertugas menyampaikan wahyu adalah ...","Jibril","Mikail","Israfil","Izrail",0,"Malaikat Jibril menyampaikan wahyu Allah kepada para nabi dan rasul."],
+  ["Percaya kepada hari akhir termasuk rukun iman ke- ...","Tiga","Empat","Lima","Enam",2,"Iman kepada hari akhir merupakan rukun iman kelima."],
+  ["Sikap berserah diri kepada Allah setelah berusaha disebut ...","Takabur","Tawakal","Hasad","Riya",1,"Tawakal dilakukan setelah berikhtiar dan berdoa, bukan dengan meninggalkan usaha."]
+ ]},
+ {name:"Taman Ibadah",icon:"🕌",topic:"Ibadah",questions:[
+  ["Bersuci dari hadas kecil sebelum salat dilakukan dengan ...","Mandi wajib","Wudu","Istinja saja","Tidur",1,"Wudu dilakukan untuk menghilangkan hadas kecil sesuai ketentuan syariat."],
+  ["Salat fardu dalam sehari semalam berjumlah ...","Tiga waktu","Empat waktu","Lima waktu","Enam waktu",2,"Salat fardu wajib dilaksanakan lima waktu sehari semalam."],
+  ["Arah yang dituju umat Islam ketika salat disebut ...","Mihrab","Kiblat","Mimbar","Saf",1,"Kiblat umat Islam adalah arah Ka'bah di Masjidil Haram."],
+  ["Puasa wajib bagi umat Islam dilaksanakan pada bulan ...","Muharam","Rajab","Ramadan","Syawal",2,"Puasa Ramadan merupakan salah satu rukun Islam."],
+  ["Salah satu hal yang membatalkan wudu adalah ...","Membaca buku","Makan buah","Tidur nyenyak","Berjalan",2,"Tidur nyenyak dapat membatalkan wudu; pelajari rincian ketentuannya sesuai materi fikih yang dipakai."]
+ ]},
+ {name:"Hutan Akhlak",icon:"🌳",topic:"Akhlak",questions:[
+  ["Mengatakan sesuatu sesuai kenyataan merupakan sikap ...","Jujur","Dengki","Boros","Sombong",0,"Jujur berarti berkata dan bertindak sesuai kebenaran."],
+  ["Menjaga titipan yang dipercayakan kepada kita adalah sikap ...","Amanah","Riya","Fitnah","Israf",0,"Amanah berarti dapat dipercaya dan menjaga tanggung jawab."],
+  ["Ketika berbeda pendapat dengan teman, sebaiknya kita ...","Mengejeknya","Memaksakan kehendak","Mendengarkan dengan sopan","Memutus pertemanan",2,"Perbedaan disikapi dengan santun, menghargai, dan berdialog."],
+  ["Contoh berbakti kepada orang tua adalah ...","Membentak saat dinasihati","Membantu dengan hormat","Mengabaikan panggilan","Berbohong agar bebas",1,"Berbakti dilakukan melalui perkataan baik, bantuan, dan sikap hormat."],
+  ["Perbuatan pamer amal agar dipuji orang disebut ...","Ikhlas","Syukur","Riya","Sabar",2,"Riya adalah melakukan ibadah atau kebaikan untuk memperoleh pujian manusia."]
+ ]},
+ {name:"Perpustakaan Qur’an",icon:"📖",topic:"Al-Qur’an dan Hadis",questions:[
+  ["Al-Qur’an diturunkan kepada Nabi ...","Ibrahim a.s.","Musa a.s.","Muhammad saw.","Isa a.s.",2,"Al-Qur’an diturunkan kepada Nabi Muhammad saw."],
+  ["Surah pembuka dalam mushaf Al-Qur’an adalah ...","Al-Baqarah","Al-Fatihah","Al-Ikhlas","An-Nas",1,"Surah Al-Fatihah menjadi surah pembuka dalam mushaf."],
+  ["Hadis adalah sumber ajaran Islam yang memuat ...","Kisah semua raja","Perkataan, perbuatan, dan persetujuan Nabi","Hanya pendapat ulama","Catatan perdagangan",1,"Hadis mencakup perkataan, perbuatan, dan persetujuan Nabi Muhammad saw."],
+  ["Membaca Al-Qur’an sebaiknya dilakukan dengan ...","Tergesa-gesa","Tartil dan memperhatikan tajwid","Sambil bercanda","Tanpa memperhatikan huruf",1,"Membaca dengan tartil berarti tenang dan jelas sesuai kaidah bacaan."],
+  ["Wahyu pertama yang diterima Nabi Muhammad saw. terdapat pada surah ...","Al-‘Alaq ayat 1–5","Al-Fil","Al-Kautsar","Al-Ma’un",0,"Wahyu pertama adalah awal Surah Al-‘Alaq, ayat 1–5."]
+ ]},
+ {name:"Kota Peradaban",icon:"🏛️",topic:"Sejarah Islam",questions:[
+  ["Nabi Muhammad saw. hijrah dari Makkah ke ...","Damaskus","Madinah","Kairo","Baghdad",1,"Hijrah ke Madinah menjadi peristiwa penting dalam sejarah Islam."],
+  ["Gelar Al-Amin yang dikenal pada Nabi Muhammad saw. bermakna ...","Yang kuat","Yang terpercaya","Yang kaya","Yang terkenal",1,"Al-Amin berarti orang yang dapat dipercaya."],
+  ["Masjid pertama yang dibangun Nabi saat hijrah ke sekitar Madinah adalah ...","Masjid Quba","Masjidil Aqsa","Masjid Nabawi di Makkah","Masjid Kufa",0,"Masjid Quba dibangun ketika Nabi tiba di daerah Quba dalam perjalanan hijrah."],
+  ["Sikap yang dapat diteladani dari perjuangan Nabi adalah ...","Putus asa","Mudah menyerah","Sabar dan teguh","Membalas semua ejekan",2,"Kesabaran, keteguhan, dan kasih sayang merupakan teladan penting."],
+  ["Piagam Madinah mengajarkan pentingnya ...","Permusuhan antarkelompok","Kerja sama dan hidup berdampingan","Menghindari semua tetangga","Persaingan tanpa aturan",1,"Piagam Madinah dikenal sebagai kesepakatan untuk mengatur kehidupan masyarakat yang beragam."]
+ ]}
+];
+const $ = id => document.getElementById(id);
+const keys={points:"jk_points",unlocked:"jk_unlocked",completed:"jk_completed"};
+let mode="solo", levelIndex=0, questions=[], qIndex=0, sessionPoints=0, correctCount=0, streak=0, maxStreak=0, answered=false, turn=0, teamPoints=[0,0], teamNames=["Tim Cendekia","Tim Berkah"], playerName="Pemain";
+function getNum(k,d=0){return Number(localStorage.getItem(k)??d)||d}
+function getCompleted(){try{return JSON.parse(localStorage.getItem(keys.completed)||"[]")}catch{return []}}
+function saveProgress(){localStorage.setItem(keys.points,String(getNum(keys.points)+sessionPoints));localStorage.setItem(keys.unlocked,String(Math.max(getNum(keys.unlocked,1),Math.min(5,levelIndex+2))));let c=getCompleted();if(!c.includes(levelIndex))c.push(levelIndex);localStorage.setItem(keys.completed,JSON.stringify(c));updateHeader();renderMap()}
+function updateHeader(){$("headerPoints").textContent=getNum(keys.points)}
+function show(section){["home","setup","game","result"].forEach(id=>$(id).classList.toggle("hidden",id!==section));}
+function renderMap(){let unlocked=getNum(keys.unlocked,1),completed=getCompleted();$("levelMap").innerHTML=levels.map((l,i)=>`<div class="level ${i+1>unlocked?"locked":""} ${i+1===unlocked?"current":""}"><div style="font-size:1.7rem">${i+1>unlocked?"🔒":l.icon}</div><strong>${i+1}. ${l.name}</strong><small>${completed.includes(i)?"✅ Selesai":i+1>unlocked?"Terkunci":"Siap dimainkan"}</small></div>`).join("");$("levelSelect").innerHTML=levels.map((l,i)=>`<option value="${i}" ${i+1>unlocked?"disabled":""}>Level ${i+1} — ${l.name}${i+1>unlocked?" (terkunci)":""}</option>`).join("");}
+function openSetup(){renderMap();show("setup")}
+$("startButton").onclick=openSetup;$("backHome").onclick=()=>show("home");
+document.querySelectorAll(".mode-choice").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll(".mode-choice").forEach(x=>x.classList.toggle("selected",x===b));$("soloSetup").classList.toggle("hidden",mode!=="solo");$("teamSetup").classList.toggle("hidden",mode!=="team")});
+$("playButton").onclick=()=>{
+ mode=document.querySelector(".mode-choice.selected").dataset.mode;levelIndex=Number($("levelSelect").value);playerName=$("playerName").value.trim()||"Pemain";teamNames=[$("teamA").value.trim()||"Tim A",$("teamB").value.trim()||"Tim B"];teamPoints=[0,0];turn=0;
+ const completed=getCompleted();questions=levels[levelIndex].questions.map((q,i)=>({...q,original:i})).sort(()=>Math.random()-.5);qIndex=0;sessionPoints=0;correctCount=0;streak=0;maxStreak=0;
+ $("levelBadge").textContent="LEVEL "+(levelIndex+1);$("levelTitle").textContent=levels[levelIndex].name;$("playerLabel").textContent=mode==="solo"?"Petualang: "+playerName:"Mode kelompok • dua tim bergiliran";
+ $("teamScore").classList.toggle("hidden",mode!=="team");$("teamNameA").textContent=teamNames[0];$("teamNameB").textContent=teamNames[1];show("game");renderQuestion();
+};
+function renderQuestion(){answered=false;const q=questions[qIndex];$("questionCount").textContent=(qIndex+1)+"/"+questions.length;$("sessionPoints").textContent=sessionPoints;$("streak").textContent=streak;$("progressBar").style.width=(qIndex/questions.length*100)+"%";$("topicLabel").textContent="Materi: "+levels[levelIndex].topic;$("turnLabel").textContent=mode==="team"?"Giliran: "+teamNames[turn]:"";$("questionText").textContent=q[0];$("feedback").className="feedback hidden";$("nextButton").classList.add("hidden");$("hint").textContent="Pilih satu jawaban terbaik.";
+$("answers").innerHTML=q.slice(1,5).map((a,i)=>`<button class="answer" data-answer="${i}"><b>${String.fromCharCode(65+i)}.</b> ${a}</button>`).join("");document.querySelectorAll(".answer").forEach(b=>b.onclick=()=>chooseAnswer(Number(b.dataset.answer)));updateTeamUI();}
+function updateTeamUI(){$("teamPointsA").textContent=teamPoints[0];$("teamPointsB").textContent=teamPoints[1];$("teamCardA").classList.toggle("active",mode==="team"&&turn===0);$("teamCardB").classList.toggle("active",mode==="team"&&turn===1)}
+function chooseAnswer(choice){if(answered)return;answered=true;const q=questions[qIndex],correct=q[5],buttons=[...document.querySelectorAll(".answer")];buttons.forEach((b,i)=>{b.disabled=true;if(i===correct)b.classList.add("correct");if(i===choice&&i!==correct)b.classList.add("wrong")});const isCorrect=choice===correct;let earned=0;if(isCorrect){correctCount++;streak++;maxStreak=Math.max(maxStreak,streak);earned=100+(streak>1?Math.min((streak-1)*20,100):0);sessionPoints+=earned;if(mode==="team")teamPoints[turn]+=earned;else streak=streak;}else{streak=0;}
+$("sessionPoints").textContent=sessionPoints;$("streak").textContent=streak;$("progressBar").style.width=((qIndex+1)/questions.length*100)+"%";$("feedback").className="feedback "+(isCorrect?"good":"bad");$("feedback").innerHTML=(isCorrect?"✅ <b>Benar! +"+earned+" poin.</b> ":"💡 <b>Belum tepat.</b> Jawaban yang benar: <b>"+q[correct+1]+"</b>. ")+q[6];$("nextButton").textContent=qIndex===questions.length-1?"Lihat Hasil 🏆":"Soal Berikutnya →";$("nextButton").classList.remove("hidden");$("hint").textContent=mode==="team"?"Poin masuk ke "+teamNames[turn]+".":"Bagus! Baca pembahasan sebelum lanjut.";updateTeamUI();}
+$("nextButton").onclick=()=>{if(qIndex<questions.length-1){qIndex++;if(mode==="team")turn=1-turn;renderQuestion()}else finishLevel()};
+function finishLevel(){saveProgress();show("result");const stars=correctCount===5?"★★★":correctCount>=3?"★★☆":"★☆☆";$("resultEmoji").textContent=correctCount===5?"🏆":correctCount>=3?"🌟":"💪";$("resultTitle").textContent=correctCount===5?"Luar biasa, misi sempurna!":correctCount>=3?"Hebat, teruskan petualangan!":"Tetap semangat, coba lagi!";$("resultMessage").textContent="Kamu menjawab "+correctCount+" dari "+questions.length+" soal dengan benar. "+(levelIndex<4?"Selesaikan level berikutnya untuk melanjutkan peta.":"Kamu telah menuntaskan seluruh peta petualangan!");$("resultPoints").textContent=sessionPoints;$("resultCorrect").textContent=correctCount+"/"+questions.length;$("resultStars").textContent=stars;$("teamResult").classList.toggle("hidden",mode!=="team");if(mode==="team"){let win=teamPoints[0]===teamPoints[1]?"Hasil seri!":teamPoints[0]>teamPoints[1]?teamNames[0]+" menang!":teamNames[1]+" menang!";$("teamResult").innerHTML=`<div class="feedback good"><b>${win}</b><br>${teamNames[0]}: ${teamPoints[0]} poin • ${teamNames[1]}: ${teamPoints[1]} poin</div>`;}}
+$("quitButton").onclick=()=>{if(confirm("Keluar dari level ini? Poin sesi yang belum selesai tidak disimpan."))show("home")};
+$("replayButton").onclick=()=>{openSetup();$("levelSelect").value=String(levelIndex)};$("mapButton").onclick=()=>show("home");
+$("resetButton").onclick=()=>{if(confirm("Hapus semua progres dan poin yang tersimpan di browser ini?")){Object.values(keys).forEach(k=>localStorage.removeItem(k));updateHeader();renderMap();alert("Progres lokal telah dihapus.")}};
+updateHeader();renderMap();
+</script>
+</body>
+</html>
